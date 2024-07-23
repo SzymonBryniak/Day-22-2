@@ -1,14 +1,6 @@
 from turtle import Screen, Turtle
 
 
-
-
-# screen.tracer(0, 0)
-
-
-# screen.update()
-
-
 class PongGame:
 
     def __init__(self):
