@@ -1,41 +1,30 @@
 from turtle import Screen, Turtle
+from Pad_1 import Paddle1
+from Pad_2 import Paddle2
 
 
-screen = Screen()
-screen.bgcolor("black")
-screen.setup(width=800, height=600)
-screen.title("Pong")
-screen.tracer(0)
+class PongGame:
 
-paddle = Turtle()
-paddle.shape("square")
-paddle.color("green")
-paddle.shapesize(stretch_wid=5, stretch_len=1)
-paddle.penup()
-paddle.goto(350, 0)
+    def __init__(self):
+        self.screen = Screen()
+        self.screen.tracer(0)
+        self.paddle1_on = Paddle1((350, 0))
+        self.paddle2_on = Paddle2((-350, 0))
 
-
-def move_up():
-    # Paddle.setheading(90)
-    y_up_cor = paddle.ycor() + 10
-    paddle.goto(x=350, y=y_up_cor)
-    return
-
-
-def move_down():
-    # Paddle.setheading(90)
-    y_down_cor = paddle.ycor() - 10
-    paddle.goto(x=350, y=y_down_cor)
-    return
+    def game_on(self):
+        self.screen.setup(width=800, height=600)
+        self.screen.bgcolor('black')
+        self.screen.title('Pong')
+        self.screen.listen()
+        self.screen.onkey(self.paddle1_on.move_up, key='Up')
+        self.screen.onkey(self.paddle1_on.move_down, key='Down')
+        self.screen.onkey(self.paddle2_on.move_up, key='w')
+        self.screen.onkey(self.paddle2_on.move_down, key='s')
+        game_on = True
+        while game_on:
+            self.screen.update()
+        self.screen.exitonclick()
 
 
-screen.listen()
-screen.onkey(move_up, key='Up')
-screen.onkey(move_down, key='Down')
-
-
-game_on = True
-while game_on:
-    screen.update()
-
-screen.exitonclick()
+game = PongGame()
+game.game_on()
