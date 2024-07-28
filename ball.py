@@ -8,7 +8,7 @@ class Ball(Turtle):
         self.shape('circle')
         self.color('Green')
         self.shapesize(1, 1)
-        self.goto(position)
 
     def move_ball(self):
-        self.goto(260, 40)
+        self.speed(1)
+        self.goto(380, 280)
