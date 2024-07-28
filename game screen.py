@@ -12,7 +12,7 @@ class PongGame:
         self.screen.setup(width=800, height=600)
         self.screen.bgcolor('black')
         self.screen.title('Pong')
-        self.ball_on = Ball((0, 0))
+        self.ball_on = Ball()
         self.paddle1_on = Paddle1((350, 0))
         self.paddle2_on = Paddle2((-350, 0))
         self.game_is_on = True
@@ -21,8 +21,8 @@ class PongGame:
         self.screen.onkey(self.paddle1_on.move_down, key='Down')
         self.screen.onkey(self.paddle2_on.move_up, key='w')
         self.screen.onkey(self.paddle2_on.move_down, key='s')
-        self.game_on()
-        self.screen.exitonclick()
+        self.game_on2()
+
         # while self.game_is_on:
         #     self.ball_on.move_ball()
         #     time.sleep(1)
@@ -38,7 +38,25 @@ class PongGame:
             self.screen.update()
             self.screen.tracer(1)
             self.ball_on.move_ball()
-            
+        self.screen.exitonclick()
+
+    def game_on2(self):
+        ame_is_on = True
+        while self.game_is_on:
+            time.sleep(0.1)
+            self.screen.update()
+            self.ball_on.move_ball()
+
+    def screen_on(self):
+        self.screen.setup(width=800, height=600)
+        self.screen.bgcolor('black')
+        self.screen.title('Pong')
+        self.screen.listen()
+        self.screen.onkey(self.paddle1_on.move_up, key='Up')
+        self.screen.onkey(self.paddle1_on.move_down, key='Down')
+        self.screen.onkey(self.paddle2_on.move_up, key='w')
+        self.screen.onkey(self.paddle2_on.move_down, key='s')
+        self.screen.exitonclick()
 
 
 game = PongGame()
