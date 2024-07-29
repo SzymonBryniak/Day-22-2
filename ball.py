@@ -8,10 +8,12 @@ class Ball(Turtle):
         self.shape('circle')
         self.color('Green')
         self.shapesize(1, 1)
+        self.x_move = 10
+        self.y_move = 10
 
     def move_ball(self):
-        new_x = self.xcor() + 5
-        new_y = self.ycor() + 5
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
         if new_x >= 290:
             while new_y < 300:
                 new_y = self.ycor() - 10
@@ -23,10 +25,13 @@ class Ball(Turtle):
             print(self.xcor(), self.ycor())
             return
 
+    def bounce_udemy(self):
+        self.y_move *= -1
+
     def move_ball_udemy(self):
-        new_x = self.xcor() + 10
-        new_y = self.ycor() + 10
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
-        return new_x, new_y
+
 
 
