@@ -10,13 +10,18 @@ class Ball(Turtle):
         self.shapesize(1, 1)
 
     def move_ball(self):
-        new_x = self.xcor() + 10
-        new_y = self.ycor() + 10
-        if new_x - 5 >= 290:
-            return
+        new_x = self.xcor() + 5
+        new_y = self.ycor() + 5
+        if new_x >= 290:
+            while new_y < 300:
+                new_y = self.ycor() - 10
+                self.goto(new_x, new_y)
+                return
         else:
+
             self.goto(new_x, new_y)
-            print(self.xcor())
+            print(self.xcor(), self.ycor())
+            return
 
     def move_ball_udemy(self):
         new_x = self.xcor() + 10
