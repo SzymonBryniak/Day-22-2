@@ -11,7 +11,7 @@ class Ball(Turtle):
         self.x_move = 10
         self.y_move = 10
 
-    def move_ball(self):
+    def move_ball(self):  # includes bounce y mechanism
         new_x = self.xcor() + self.x_move
         new_y = self.ycor() + self.y_move
         if new_x >= 290:
@@ -25,13 +25,26 @@ class Ball(Turtle):
             print(self.xcor(), self.ycor())
             return
 
-    def bounce_udemy(self):
+    def game_over(self):
+        self.setpos(0, 0)
+
+    def bounce_y_udemy(self):
         self.y_move *= -1
 
-    def move_ball_udemy(self):
+    def bounce_x(self):
+        self.x_move *= -1
+
+    def move_ball_1_udemy(self):
         new_x = self.xcor() + self.x_move
         new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
+
+    def move_ball_2_udemy(self):
+        new_x = self.xcor() - 20
+        new_y = self.ycor() + 10
+        self.goto(new_x, new_y)
+
+
 
 
 
