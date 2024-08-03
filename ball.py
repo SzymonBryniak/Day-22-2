@@ -27,6 +27,7 @@ class Ball(Turtle):
 
     def game_over(self):
         self.setpos(0, 0)
+        self.bounce_x()
 
     def bounce_y_udemy(self):
         self.y_move *= -1
@@ -41,7 +42,7 @@ class Ball(Turtle):
 
     def move_ball_2_udemy(self):
         new_x = self.xcor() - 20
-        new_y = self.ycor() + 10
+        new_y = self.ycor() - 10
         self.goto(new_x, new_y)
 
 

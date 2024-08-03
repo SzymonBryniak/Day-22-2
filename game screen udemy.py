@@ -3,6 +3,7 @@ from Pad_1 import Paddle1
 from Pad_2 import Paddle2
 from ball import Ball
 import time
+from scoreboard import Scoreboard
 
 
 screen = Screen()
@@ -26,9 +27,10 @@ game_is_on = True
 
 
 def game_loop(start_side):
-    if ball_on.xcor() > 340 or ball_on.xcor() < -340:
+
+    if ball_on.xcor() > 340 or ball_on.xcor() < -340:  # out of bands detection
         print(f'game over{ball_on.xcor()}')
-        ball_on.game_over()
+        ball_on.game_over()  # ball position reset
         game_loop(ball_on.xcor())
         while game_is_on:
             time.sleep(0.1)
@@ -37,6 +39,7 @@ def game_loop(start_side):
                 ball_on.move_ball_1_udemy()
             elif start_side > 0:
                 ball_on.move_ball_2_udemy()
+
             game_loop(ball_on.xcor())
 
     if ball_on.ycor() > 280 or ball_on.ycor() < -280:
@@ -48,15 +51,50 @@ def game_loop(start_side):
         ball_on.bounce_x()
 
 
-def game_start():
+def game_start(start_side=-1):
     while game_is_on:
         time.sleep(0.1)
         screen.update()
         ball_on.move_ball_1_udemy()
-        # print(ball_on.xcor())
-        game_loop(ball_on.xcor())
+        # game_loop(ball_on.xcor())
+        if ball_on.ycor() > 280 or ball_on.ycor() < -280:
+            ball_on.bounce_y_udemy()
+
+        if ball_on.distance(paddle1_on) < 50 and ball_on.xcor() > 320 or ball_on.distance(
+                paddle2_on) < 50 and ball_on.xcor() < -320:
+            ball_on.bounce_x()
+
+        if ball_on.xcor() > 380:
+            ball_on.reset()
+
+        if ball_on.xcor() < -380:
+            ball_on.reset()
 
 
-game_start()
+score = Scoreboard()
+
+sleep = 0.1
+# game_start()
+while game_is_on:
+    time.sleep(sleep)
+    screen.update()
+    ball_on.move_ball_1_udemy()
+    # game_loop(ball_on.xcor())
+
+    if ball_on.ycor() > 280 or ball_on.ycor() < -280:
+        ball_on.bounce_y_udemy()
+
+    if ball_on.distance(paddle1_on) < 50 and ball_on.xcor() > 320 or ball_on.distance(
+            paddle2_on) < 50 and ball_on.xcor() < -320:
+        sleep -= 0.01
+        ball_on.bounce_x()
+
+    if ball_on.xcor() > 380:
+        score.r_point()
+        ball_on.game_over()
+
+    if ball_on.xcor() < -380:
+        ball_on.game_over()
+        score.l_point()
 screen.exitonclick()
 
